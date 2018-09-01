@@ -24,20 +24,22 @@ namespace ConsoleThread
             Console.WriteLine(Id.ToString() + "号矩形已创建");
         }
         //唯一方法：矩形过程
-        public void RectProc (int id, int type, object leftParam,object rightParam)
+        public virtual void RectProc (int id, int type, object leftParam,object rightParam)
         {
             switch(type)
             {
-                case 1:
+                case 1: // 移动位置,改变大小
                     Size = (Size)leftParam;
                     Location = (Point)rightParam;
-                    Console.WriteLine(Id.ToString() + $"号矩形,改变大小为：{Size}, 位置为：{Location}");
+                    OnPositionChanged(new PositionChangedEventArgs(Size, Location));
+                    //Console.WriteLine(Id.ToString() + $"号矩形,改变大小为：{Size}, 位置为：{Location}");
                     break;
-                case 2:
+                case 2: // 显示信息
                     Console.WriteLine(Id.ToString() + $"号矩形大小为：{Size}, 位置为：{Location}");
                     break;
-                case 3:
+                case 3: // 关闭
                     Alive = false;
+                    OnKill(new EventArgs());
                     Console.WriteLine(Id.ToString() + "号矩形已关闭");
                     break;
                 default:
@@ -47,5 +49,17 @@ namespace ConsoleThread
                 
 
         }
+        protected virtual void OnPositionChanged(PositionChangedEventArgs e)
+        {
+            if (PositionChanged == null) return;
+            PositionChanged(this, e);
+        }
+        protected virtual void OnKill(EventArgs e)
+        {
+            if (Kill == null) return;
+            Kill(this, e);
+        }
+        public event PositionChangedEventHandler PositionChanged;
+        public event EventHandler Kill;
     }
 }

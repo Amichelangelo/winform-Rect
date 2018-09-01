@@ -21,4 +21,11 @@ namespace ConsoleThread
             RightParam = rightParam;
         }
     }
+    enum Sgl
+    {
+        RS_POSITIONCHANGE = 1, // 改变位置
+        RS_SHOWINFO, // 显示信息
+        RS_KILL,// 关闭矩形
+        RS_QUIT // 退出
+    }
 }
