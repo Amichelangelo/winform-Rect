@@ -18,7 +18,7 @@ namespace ConsoleThread
         }
         protected override void OnPositionChanged(PositionChangedEventArgs e)
         {
-            MainThread.SendSignal(Id,1,e.Size,e.Location);
+            RectThread.SendSignal(Id,1,e.Size,e.Location);
             base.OnPositionChanged(e);
         }
     }

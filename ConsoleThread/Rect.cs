@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace ConsoleThread
 {
-    class Rect
+    public class Rect
     {
         public int Id { get; set; }
         public string Text { get; set; }
