@@ -21,9 +21,17 @@ namespace ConsoleThread
             Size = size;
             Location = location;
             Alive = true;
-            Console.WriteLine(Id.ToString() + "号矩形已创建");
+            RectThread.FromCurrent().AddRect(this);
+            Console.WriteLine(Id + "号矩形已创建");
         }
-        //唯一方法：矩形过程
+
+        /// <summary>
+        /// 矩形对外唯一接口
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="leftParam"></param>
+        /// <param name="rightParam"></param>
         public virtual void RectProc (int id, int type, object leftParam,object rightParam)
         {
             switch(type)
@@ -32,7 +40,6 @@ namespace ConsoleThread
                     Size = (Size)leftParam;
                     Location = (Point)rightParam;
                     OnPositionChanged(new PositionChangedEventArgs(Size, Location));
-                    //Console.WriteLine(Id.ToString() + $"号矩形,改变大小为：{Size}, 位置为：{Location}");
                     break;
                 case 2: // 显示信息
                     Console.WriteLine(Id.ToString() + $"号矩形大小为：{Size}, 位置为：{Location}");
@@ -49,16 +56,8 @@ namespace ConsoleThread
                 
 
         }
-        protected virtual void OnPositionChanged(PositionChangedEventArgs e)
-        {
-            if (PositionChanged == null) return;
-            PositionChanged(this, e);
-        }
-        protected virtual void OnKill(EventArgs e)
-        {
-            if (Kill == null) return;
-            Kill(this, e);
-        }
+        protected virtual void OnPositionChanged(PositionChangedEventArgs e) => PositionChanged?.Invoke(this, e);
+        protected virtual void OnKill(EventArgs e) => Kill?.Invoke(this, e);
         public event PositionChangedEventHandler PositionChanged;
         public event EventHandler Kill;
     }

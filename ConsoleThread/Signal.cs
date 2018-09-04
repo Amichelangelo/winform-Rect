@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleThread
 {
-    class Signal
+    internal class Signal
     {
         public int Id { get; set; }
         public int Type { get; set; }
@@ -21,11 +21,11 @@ namespace ConsoleThread
             RightParam = rightParam;
         }
     }
-    enum Sgl
+    internal enum Sgl
     {
-        RS_POSITIONCHANGE = 1, // 改变位置
-        RS_SHOWINFO, // 显示信息
-        RS_KILL,// 关闭矩形
-        RS_QUIT // 退出
+        RsPositionchange = 1, // 改变位置
+        RsShowinfo, // 显示信息
+        RsKill,// 关闭矩形
+        RsQuit // 退出
     }
 }

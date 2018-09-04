@@ -119,7 +119,7 @@ namespace ConsoleThread
             if (_signalList.Count != 0) // 需要处理同步线程
             {
                 signal = _signalList.Dequeue();
-                return signal.Type != (int) Sgl.RS_QUIT;
+                return signal.Type != (int) Sgl.RsQuit;
             }
 
             Thread.Sleep(1);
@@ -136,7 +136,7 @@ namespace ConsoleThread
             }
         }
 
-        public static void PostQuit() => _signalList.Enqueue(new Signal(0, (int) Sgl.RS_QUIT, null, null));
+        public static void PostQuit() => _signalList.Enqueue(new Signal(0, (int) Sgl.RsQuit, null, null));
 
         public static void SendSignal(int id, int type, object leftParam, object rightParam) =>
             _signalList.Enqueue(new Signal(id, type, leftParam, rightParam));
