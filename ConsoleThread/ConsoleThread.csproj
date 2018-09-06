@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeriveRect.cs" />
+    <Compile Include="Rect1.cs" />
     <Compile Include="RectThread.cs" />
     <Compile Include="PositionChangedEventArgs.cs" />
     <Compile Include="Program.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Rect.cs" />
     <Compile Include="RectApplication.cs" />
     <Compile Include="Signal.cs" />
+    <Compile Include="WeakDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

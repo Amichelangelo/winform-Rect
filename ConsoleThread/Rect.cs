@@ -25,6 +25,15 @@ namespace ConsoleThread
             Console.WriteLine(Id + "号矩形已创建");
         }
 
+        public Rect()
+        {
+            Id = int.Parse(DateTime.Today.ToString("yyddmmss"));
+            Text = string.Empty;
+            Size = new Size(100, 100);
+            Location = new Point(100, 100);
+            Alive = true;
+            RectThread.FromCurrent().AddRect(this);
+        }
         /// <summary>
         /// 矩形对外唯一接口
         /// </summary>

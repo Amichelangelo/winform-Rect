@@ -48,8 +48,7 @@ namespace ConsoleThread
                 rect.Kill += (o, e) => PostQuit();
             }
 
-            Signal signal;
-            while (GetSignal(out signal))
+            while (   GetSignal(out var signal))
             {
                 DispatchSignal(signal);
                 if (reason == 2) break;
@@ -73,37 +72,7 @@ namespace ConsoleThread
                     RectApplication.RaiseApplicationExit();
             }
         }
-
-        public static void Main()
-        {
-            /*
-             * 初始化4个Rect对象，添加到集合中
-             * rects.Add(new Rect(1, "my name is Rect1", new Size(100, 100), new Point(10, 10)));
-             * rects.Add(new Rect(2, "my name is Rect2", new Size(455, 250), new Point(100, 150)));
-             * rects.Add(new Rect(3, "my name is Rect3", new Size(300, 500), new Point(250, 100)));
-             * rects.Add(new Rect(4, "my name is Rect4", new Size(300, 600), new Point(50, 80)));
-            */
-            var chiefRect = new Rect(1, "i am the chiefRect", new Size(100, 100), new Point(10, 10));
-            chiefRect.Kill += (o, e) => PostQuit();
-            chiefRect.PositionChanged += (o, e) =>
-                Console.WriteLine(chiefRect.Id.ToString() + $"号矩形,改变大小为：{e.Size}, 位置为：{e.Location}");
-
-            var deriveRect = new DeriveRect(2, "i am the deriveRect", new Size(150, 150), new Point(100, 100));
-            deriveRect.PositionChanged += (o, e) =>
-                Console.WriteLine(deriveRect.Id.ToString() + $"号矩形,改变大小为：{e.Size}, 位置为：{e.Location}");
-            _rects.Add(chiefRect);
-            _rects.Add(deriveRect);
-
-            // 循环接受用户收入
-            Signal signal = null;
-            while (GetSignal(out signal))
-            {
-                DispatchSignal(signal);
-            }
-
-            Console.WriteLine("the thread exit");
-            Console.ReadKey(); //阻塞查看运行情况
-        }
+        
 
         static bool GetSignal(out Signal signal)
         {

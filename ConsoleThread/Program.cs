@@ -12,6 +12,7 @@ namespace ConsoleThread
         {
             RectApplication.ApplicationExit += RectApplication_ApplicationExit;
             RectApplication.ThreadExit += RectApplication_ThreadExit;
+            RectApplication.Start(new Rect1());
         }
 
         private static void RectApplication_ThreadExit(object sender, EventArgs e)
