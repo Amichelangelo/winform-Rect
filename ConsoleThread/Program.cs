@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleThread
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
-            RectApplication.ApplicationExit += RectApplication_ApplicationExit;
-            RectApplication.ThreadExit += RectApplication_ThreadExit;
-            RectApplication.Start(new Rect1());
+            var test = new int[]{1,2,3,4,5};
+            int a1 = 0, a2 = 0;
+            Console.WriteLine("a1++"+test[a1++]+"++a2"+test[++a2]);
+            Console.ReadLine();
+            //RectApplication.ApplicationExit += RectApplication_ApplicationExit;
+            //RectApplication.ThreadExit += RectApplication_ThreadExit;
+            //RectApplication.Start(new Rect1());
         }
 
         private static void RectApplication_ThreadExit(object sender, EventArgs e)
